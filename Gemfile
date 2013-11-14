@@ -5,9 +5,8 @@ gem 'mongoid'
 gem 'twitter-bootstrap-rails', :git => 'git@github.com:seyhunak/twitter-bootstrap-rails.git'
 gem 'haml-rails'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'aws-sdk', '~> 1.3.4'
 
 
 # Gems used only for assets and not required

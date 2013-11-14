@@ -1,4 +1,7 @@
 JaffaChat::Application.routes.draw do
+  resources :clips
+
+
   resources :libraries
 
   root :to => 'libraries#index'

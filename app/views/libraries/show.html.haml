@@ -4,6 +4,20 @@
   %b Title:
   = @library.title
 
+%p
+  %b Add Clip
+  = form_for @new_clip, :html => { :multipart => true } do |f|
+    = f.hidden_field :library, :value => @library.id
+    = f.file_field :file
+
+    .actions
+      = f.submit 'Add Clip'
+  
+
+
+
+
+
 = link_to 'Edit', edit_library_path(@library)
 \|
 = link_to 'Back', libraries_path
