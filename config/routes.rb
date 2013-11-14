@@ -1,7 +1,11 @@
 JaffaChat::Application.routes.draw do
   resources :sayings
 
-  resources :clips
+  resources :clips do
+    collection do
+      post 'reindex'
+    end
+  end
 
   resources :libraries
 

@@ -30,12 +30,13 @@
           .container.nav-collapse
             %ul.nav
               %li= link_to "Libraries", libraries_path
+              %li= link_to "Index Clips", reindex_clips_path, :method => :post
 
     .container-fluid
 
       .row-fluid
         .span3
-          &nbsp;
+          = yield(:sidebar)
         .span9
           = bootstrap_flash
           = yield

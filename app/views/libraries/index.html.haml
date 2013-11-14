@@ -1,19 +1,15 @@
+- content_for :sidebar do
+  = link_to 'New Library', new_library_path
+
 %h1 Listing libraries
 
-%table
-  %tr
-    %th Title
-    %th
-    %th
-    %th
-
+%table.table.table-striped
   - @libraries.each do |library|
     %tr
-      %td= library.title
+      %td
+        %b= library.title
       %td= link_to 'Show', library
       %td= link_to 'Edit', edit_library_path(library)
-      %td= link_to 'Destroy', library, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Library', new_library_path

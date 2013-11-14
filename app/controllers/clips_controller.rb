@@ -44,7 +44,7 @@ class ClipsController < ApplicationController
 
     respond_to do |format|
       if @clip.save
-        format.html { redirect_to @clip, notice: 'Clip was successfully created.' }
+        format.html { redirect_to request.referer, notice: 'Clip was successfully created.' }
         format.json { render json: @clip, status: :created, location: @clip }
       else
         format.html { render action: "new" }
@@ -75,5 +75,10 @@ class ClipsController < ApplicationController
     @clip = Clip.find(params[:id])
     redirect_to @clip.library
     @clip.destroy
+  end
+
+  def reindex
+    Clip.reindex
+    redirect_to request.referer, notice: 'Clips reindexed'
   end
 end
