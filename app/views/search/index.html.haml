@@ -1,0 +1,12 @@
+= form_tag search_post_path, :method => :post do
+  = text_field_tag :q
+  = submit_tag "Search"
+
+- if @results
+  - if @results.present?
+    - @results.each do |clip|
+      = image_tag clip.file
+      %br
+  - else
+    %b= "No results for #{params[:q]}"
+

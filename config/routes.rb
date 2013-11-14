@@ -1,4 +1,7 @@
 JaffaChat::Application.routes.draw do
+  get "search/index", :as => 'search'
+  post "search/index", :as => 'search_post'
+
   resources :sayings
 
   resources :clips do
