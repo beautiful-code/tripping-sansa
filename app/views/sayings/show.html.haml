@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b Library
+  = link_to @saying.clip.library.title, @saying.clip.library
+
+%p
+  %b Clip 
+  = link_to image_tag(@saying.clip.file), @saying.clip
+
+%p
+  %b Text:
+  = @saying.text
+
+= link_to 'Edit', edit_saying_path(@saying)
+\|
+= link_to 'Back', sayings_path

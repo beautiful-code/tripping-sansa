@@ -1,9 +1,37 @@
 %p#notice= notice
 
 %p
+  %b Library
+  = link_to @clip.library.title, @clip.library
+
+%p
   %b Clip:
   = image_tag @clip.file
 
+%p 
+  %b Sayings
+
+  %table
+    %tr
+      %th 
+      %th
+      %th
+
+    - @clip.sayings.each do |saying|
+      %tr
+        %td= saying.text
+        %td= link_to 'Show', saying
+        %td= link_to 'Destroy', saying, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+%p
+  %b Add Saying
+  = form_for Saying.new do |f|
+    = f.hidden_field :clip, :value => @clip.id
+    = f.text_field :text
+
+    .actions
+      = f.submit 'Add Saying'
 
 
 = link_to 'Edit', edit_clip_path(@clip)

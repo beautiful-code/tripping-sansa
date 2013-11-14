@@ -1,6 +1,7 @@
 JaffaChat::Application.routes.draw do
-  resources :clips
+  resources :sayings
 
+  resources :clips
 
   resources :libraries
 

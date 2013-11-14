@@ -73,11 +73,7 @@ class ClipsController < ApplicationController
   # DELETE /clips/1.json
   def destroy
     @clip = Clip.find(params[:id])
+    redirect_to @clip.library
     @clip.destroy
-
-    respond_to do |format|
-      format.html { redirect_to clips_url }
-      format.json { head :no_content }
-    end
   end
 end

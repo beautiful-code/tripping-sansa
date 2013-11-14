@@ -4,6 +4,22 @@
   %b Title:
   = @library.title
 
+%p 
+  %b Clips
+
+  %table
+    %tr
+      %th 
+      %th
+      %th
+
+    - @library.clips.each do |clip|
+      %tr
+        %td= image_tag clip.file
+        %td= link_to 'Show', clip
+        %td= link_to 'Destroy', clip, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
 %p
   %b Add Clip
   = form_for @new_clip, :html => { :multipart => true } do |f|
