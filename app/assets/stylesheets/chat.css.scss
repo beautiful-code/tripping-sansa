@@ -2,24 +2,39 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#chat_window {
-  height: 400px;
-  border: 1px solid #ddd;
-  padding: 10px;
+#chat_session {
+  
 
-  .message {
-    background: #eee;
-    margin: 2px;
-    padding: 5px;
-    span.author {
-      color: green;
+  .message-template {
+    display: none;
+  }
+
+
+  #chat_window {
+    overflow-y:scroll;
+    height: 400px;
+    border: 1px solid #ddd;
+    padding: 10px;
+
+    .message {
+      img {
+        display: block;
+        padding: 5px;
+      }
+      background: #eee;
+      margin: 2px;
+      padding: 5px;
+      span.author {
+        font-weight: bold;
+        color: green;
+      }
     }
   }
-}
 
-#chat_input {
-  margin-top: 10px;
-  input{
-    width: 60%;
+  #chat_input {
+    margin-top: 10px;
+    input{
+      width: 60%;
+    }
   }
 }

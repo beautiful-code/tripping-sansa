@@ -28,10 +28,13 @@ var ChatSession = {
 
   addMessage: function(author, content) {
     var new_message = ChatSession.message_template.clone();
-    new_message.removeClass('.message-template').addClass('.message');
+    new_message.removeClass('message-template').addClass('message');
     new_message.find('.author').text(author + ": ");
     new_message.find('.content').text(content);
     ChatSession.cw.append(new_message);
+    console.log(ChatSession.cw.scrollHeight);
+    ChatSession.cw.animate({ scrollTop: ChatSession.cw.get(0).scrollHeight}, 1000);
+
   },
 };
 
