@@ -76,7 +76,7 @@ class SayingsController < ApplicationController
     @saying.destroy
 
     respond_to do |format|
-      format.html { redirect_to sayings_url }
+      format.html { redirect_to request.referer }
       format.json { head :no_content }
     end
   end

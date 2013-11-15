@@ -1,5 +1,4 @@
 JaffaChat::Application.routes.draw do
-  get "chat/index"
 
   match 'search' => 'search#index', :as => :search
   match 'chat' => 'chat#index', :as => :chat

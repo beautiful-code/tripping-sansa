@@ -21,4 +21,12 @@ class Clip
     end
   end
 
+  def file_path
+    file.url
+  end
+
+  def as_json *args
+    super(:methods => [:file_path])
+  end
+
 end

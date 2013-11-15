@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   def index
-    if request.post?
+    if params[:q].present?
       queries = params[:q].split(' ')
 
       all_results = {}
@@ -15,6 +15,11 @@ class SearchController < ApplicationController
       end
 
       @results = all_results.sort_by{ |key, value| -value }
+    end
+
+    respond_to do |format|
+      format.html {render action: "index"}
+      format.json {render json: @results}
     end
 
   end
