@@ -1,12 +1,18 @@
 = form_tag search_post_path, :method => :post do
-  = text_field_tag :q
+  = text_field_tag :q, params[:q]
   = submit_tag "Search"
 
 - if @results
   - if @results.present?
-    - @results.each do |clip|
-      = image_tag clip.file
-      %br
+    %table.table.table-striped
+      - @results.each do |clip, score|
+        %tr
+          %td= image_tag clip.file
+          %td
+            - clip.sayings.each do |saying|
+              = saying.text
+              %br
+          %td= score
   - else
     %b= "No results for #{params[:q]}"
 

@@ -1,11 +1,21 @@
 class SearchController < ApplicationController
   def index
     if request.post?
-      @results = Clip.search {
-                  fulltext params[:q] {
-                    phrase_slop   1
+      queries = params[:q].split(' ')
+
+      all_results = {}
+
+      queries.each do |q|
+        search = Clip.search {
+                    fulltext q
                   }
-                }.results
+        search.hits.each do |hit|
+          all_results[hit.result] = (all_results[hit.result] || 0) + hit.score
+        end
+      end
+
+      @results = all_results.sort_by{ |key, value| -value }
     end
+
   end
 end
