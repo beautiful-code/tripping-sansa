@@ -1,0 +1,15 @@
+.row-fluid
+  .span12
+    #chat_session
+      .message-template
+        .message
+          %span.author 
+          %span.content
+      #chat_window
+        - if false
+          .message
+            %span.author Ravi 
+            %span.content
+              Some thing here
+      #chat_input
+        = text_field :message, ''
