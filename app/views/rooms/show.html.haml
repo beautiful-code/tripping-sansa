@@ -1,9 +1,17 @@
-%p#notice= notice
+%h2= @room.name
+.row-fluid
+  .span4
+    #chat_session
+      .message-template
+        %img{:src => ''}
+        %span.author 
+        %span.content
+      #chat_window
+      #chat_input
+        = text_field :message, ''
+  .span6
+    #image_center
+      .images
 
-%p
-  %b Name:
-  = @room.name
-
-= link_to 'Edit', edit_room_path(@room)
-\|
-= link_to 'Back', rooms_path
+:javascript
+  var RoomConfig = #{{"room_id" =>  @room.id }.to_json};

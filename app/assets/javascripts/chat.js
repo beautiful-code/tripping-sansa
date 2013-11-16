@@ -13,13 +13,19 @@ var ChatSession = {
 
     this.addMessageListener();
 
-    this.cw.append("Chat initialized.");
+    this.loadExistingMessages();
   },
 
   addMessageListener: function() {
     ChatSession.ci.keydown(function(event){
       if(event.keyCode == '13') {
-        ChatSession.addMessage('Ravi', ChatSession.ci.val());
+
+        clip = null;
+        if(ImageCenter.selectedImage() != null) {
+          clip = {file_path: ImageCenter.selectedImage()}
+        }
+
+        ChatSession.addMessage('Ravi', ChatSession.ci.val(), clip);
         ChatSession.ci.val('');
         ImageCenter.clear();
       }
@@ -27,19 +33,28 @@ var ChatSession = {
     
   },
 
-  addMessage: function(author, content) {
+  addMessage: function(author, content, clip) {
     var new_message = ChatSession.message_template.clone();
     new_message.removeClass('message-template').addClass('message');
-    if(ImageCenter.selectedImage() != null) {
-      new_message.find('img').attr('src', ImageCenter.selectedImage());
-    }
 
     new_message.find('.author').text(author + ": ");
     new_message.find('.content').text(content);
+    if(clip)
+      new_message.find('img').attr('src', clip.file_path);
     ChatSession.cw.append(new_message);
 
     ChatSession.cw.animate({ scrollTop: ChatSession.cw.get(0).scrollHeight}, 1000);
   },
+
+  loadExistingMessages: function() {
+
+    $.getJSON( "/rooms/" + RoomConfig.room_id + ".json", function( data ) {
+      $.each( data.messages, function( index, message ) {
+        ChatSession.addMessage(message.user_email, message.content, message.clip);
+      });
+    });
+
+  }
 };
 
 $(function() {
