@@ -1,5 +1,7 @@
 JaffaChat::Application.routes.draw do
 
+  devise_for :users
+
   match 'search' => 'search#index', :as => :search
   match 'chat' => 'chat#index', :as => :chat
 

@@ -12,6 +12,8 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'sunspot_mongoid2'
 
+gem 'devise'
+
 
 
 # Gems used only for assets and not required
