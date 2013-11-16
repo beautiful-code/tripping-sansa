@@ -80,4 +80,17 @@ class RoomsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def add_message
+    {"user_id"=>"5286f51cf047adfd5b000001", "content"=>"confused ", "clip"=>{"file_path"=>"/system/clips/files/5285/496c/f047/adc8/b300/0017/original/confused.gif?1384466796", "id"=>"5285496cf047adc8b3000017/"}, "id"=>"5286f8aef047ada7c2000003"}
+
+    @room = Room.find(params[:id])
+    @room.messages.create(
+      :user_id => params[:user_id], 
+      :content => params[:content],
+      :clip_id => params[:clip].present? ? params[:clip][:id] : nil
+    )
+
+    head :ok
+  end
 end

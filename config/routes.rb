@@ -1,6 +1,10 @@
 JaffaChat::Application.routes.draw do
 
-  resources :rooms
+  resources :rooms do
+    member do
+      post 'add_message'
+    end
+  end
 
 
   devise_for :users

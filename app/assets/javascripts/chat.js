@@ -22,10 +22,13 @@ var ChatSession = {
 
         clip = null;
         if(ImageCenter.selectedImage() != null) {
-          clip = {file_path: ImageCenter.selectedImage()}
+          clip = {
+            file_path: ImageCenter.selectedImage().path,
+            id: ImageCenter.selectedImage().id
+          }
         }
 
-        ChatSession.addMessage('Ravi', ChatSession.ci.val(), clip);
+        ChatSession.addMessage(UserConfig.user_email, ChatSession.ci.val(), clip, true);
         ChatSession.ci.val('');
         ImageCenter.clear();
       }
@@ -33,7 +36,16 @@ var ChatSession = {
     
   },
 
-  addMessage: function(author, content, clip) {
+  addMessage: function(author, content, clip, post_flag) {
+    //Post the message back to the server
+    
+    if(post_flag)
+      $.post( "/rooms/" + RoomConfig.room_id + "/add_message", { user_id: UserConfig.id, content: content, clip: clip })
+        .done(function( data ) {
+          // All went well.
+      });
+
+    // Render the message
     var new_message = ChatSession.message_template.clone();
     new_message.removeClass('message-template').addClass('message');
 
@@ -50,7 +62,7 @@ var ChatSession = {
 
     $.getJSON( "/rooms/" + RoomConfig.room_id + ".json", function( data ) {
       $.each( data.messages, function( index, message ) {
-        ChatSession.addMessage(message.user_email, message.content, message.clip);
+        ChatSession.addMessage(message.user_email, message.content, message.clip, false);
       });
     });
 

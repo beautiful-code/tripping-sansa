@@ -34,8 +34,14 @@ var ImageCenter = {
 
   selectedImage: function() {
     if(ImageCenter.images.find('img.chosen').length > 0) {
-    return ImageCenter.images.find('img.chosen')[0].src;
+      return( 
+        {
+          path: ImageCenter.images.find('img.chosen').attr('src'),
+          id: ImageCenter.images.find('img.chosen').data('id')
+        }
+      )
     }
+
     return null;
   },
 
@@ -47,7 +53,7 @@ var ImageCenter = {
         ImageCenter.images.text('');
         $.each( data, function( index, clip_result ) {
           var result = clip_result[0]; 
-          ImageCenter.images.append("<img src=" + result.file_path + "/>");
+          ImageCenter.images.append("<img src=" + result.file_path + " data-id=" + result._id + " />");
         });
         ImageCenter.makeImagesSelectable();
       });
