@@ -19,7 +19,7 @@ class Message
       :user_id => user.id,
       :user_email => user.email,
       :content => content,
-      :created_at => created_at,
+      :created_at => created_at.to_i,
       :clip => clip.as_json
     }
   end

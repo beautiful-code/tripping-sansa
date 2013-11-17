@@ -48,7 +48,17 @@ var ChatSession = {
 
   pollMessagesListener: function() {
     window.setInterval(function() {
-      console.log("Polling messages");
+      console.log('Checking for new messages');
+      if(ChatSession.cw.find('.message:last').length > 0) {
+        var last_ts = ChatSession.cw.find('.message:last').attr('data-created_at');
+
+        $.getJSON( "/rooms/" + RoomConfig.room_id + "/messages.json?since=" + last_ts, function( messages) {
+          $.each( messages, function( index, message ) {
+            ChatSession.addMessage(message, false);
+          });
+        });
+
+      }
     }, 2000);
   },
 
@@ -63,15 +73,20 @@ var ChatSession = {
       new_message.attr('data-temp_id', message.temp_id);
     } else {
       new_message.attr('data-id', message.id);
+      new_message.attr('data-created_at', message.created_at);
       new_message.find('.spinner').addClass('hidden');
     }
 
     new_message.find('.author').text(message.user_email + ": ");
     new_message.find('.content').text(message.content);
-    if(message.clip)
+    if(message.clip) {
       new_message.find('img.clip').attr('src', message.clip.file_path);
+    } else {
+      new_message.find('img.clip').remove();
+    }
     ChatSession.cw.append(new_message);
     ChatSession.cw.animate({ scrollTop: ChatSession.cw.get(0).scrollHeight}, 1000);
+    ImageCenter.clear();
 
 
     //Post the message back to the server
@@ -82,6 +97,7 @@ var ChatSession = {
           message_in_chat = ChatSession.cw.find("[data-temp_id='" + message.temp_id + "']");
           message_in_chat.find('.spinner').hide();
           message_in_chat.attr('data-id',created_message.id);
+          message_in_chat.attr('data-created_at',created_message.created_at);
       });
 
   },

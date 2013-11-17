@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index]
+
   # GET /rooms
   # GET /rooms.json
   def index
@@ -95,4 +97,12 @@ class RoomsController < ApplicationController
 
     render json: msg
   end
+
+  #TODO: Extremely inefficient. Make this query more database friendly
+  def messages
+    @room = Room.find(params[:id])
+
+    render json: @room.messages.select {|m| m.created_at.to_i > params[:since].to_i}
+  end
+
 end
