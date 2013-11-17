@@ -3,10 +3,17 @@
   .span4
     #chat_session
       .message-template
-        %img{:src => ''}
+        %img.clip{:src => ''}
+        %span.spinner= image_tag 'spinner16.gif'
         %span.author 
         %span.content
       #chat_window
+        - if false
+          .message
+            = image_tag 'http://localhost:3000/system/clips/files/5285/496c/f047/adc8/b300/0017/original/confused.gif?1384466796', :class => 'clip'
+            %span.spinner= image_tag 'spinner16.gif'
+            %span.author Ravi 
+            %span.content im confused
       #chat_input
         = text_field :message, ''
   .span6

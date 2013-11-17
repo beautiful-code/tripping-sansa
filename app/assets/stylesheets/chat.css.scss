@@ -4,11 +4,9 @@
 
 #chat_session {
   
-
   .message-template {
     display: none;
   }
-
 
   #chat_window {
     overflow-y:scroll;
@@ -17,13 +15,16 @@
     padding: 10px;
 
     .message {
-      img {
+      img.clip {
         display: block;
         padding: 5px;
       }
       background: #eee;
       margin: 2px;
       padding: 5px;
+      span.spinner {
+        //display: none;
+      }
       span.author {
         font-weight: bold;
         color: green;
