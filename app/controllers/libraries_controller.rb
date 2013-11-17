@@ -81,4 +81,17 @@ class LibrariesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  def add_clip_from_url
+    @library = Library.find(params[:id])
+
+    clip = Clip.new(:library => @library)
+    clip.file = URI.parse(params[:url])
+    if clip.save
+      redirect_to request.referer, notice: 'Clip Added'
+    end
+    
+  end
+
 end

@@ -20,7 +20,11 @@ JaffaChat::Application.routes.draw do
     end
   end
 
-  resources :libraries
+  resources :libraries do
+    member do
+      post 'add_clip_from_url', :as => :add_clip_from_url
+    end
+  end
 
   root :to => 'libraries#index'
 

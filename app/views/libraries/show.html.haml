@@ -9,6 +9,13 @@
         = f.submit 'Add Clip'
 
   %p
+    %b Add clip from URL
+    = form_tag add_clip_from_url_library_path do
+      = text_field_tag :url
+      .actions
+        = submit_tag 'Add Clip from URL'
+
+  %p
     = link_to 'Edit Library', edit_library_path(@library)
 
 %p
