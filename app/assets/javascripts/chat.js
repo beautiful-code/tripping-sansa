@@ -52,11 +52,13 @@ var ChatSession = {
       if(ChatSession.cw.find('.message:last').length > 0) {
         var last_ts = ChatSession.cw.find('.message:last').attr('data-created_at');
 
-        $.getJSON( "/rooms/" + RoomConfig.room_id + "/messages.json?since=" + last_ts, function( messages) {
-          $.each( messages, function( index, message ) {
-            ChatSession.addMessage(message, false);
+        if(last_ts != undefined) {
+          $.getJSON( "/rooms/" + RoomConfig.room_id + "/messages.json?since=" + last_ts, function( messages) {
+            $.each( messages, function( index, message ) {
+              ChatSession.addMessage(message, false);
+            });
           });
-        });
+        }
 
       }
     }, 2000);

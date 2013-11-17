@@ -1,3 +1,4 @@
+- content_for :title, "Library: #{@library.title}"
 - content_for :sidebar do
   %p
     %b Add Clip
@@ -26,7 +27,7 @@
   %b Clips
 
   %table.table.table-striped
-    - @library.clips.each do |clip|
+    - @library.clips.reverse.each do |clip|
       %tr
         %td= link_to image_tag(clip.file), clip
         %td
