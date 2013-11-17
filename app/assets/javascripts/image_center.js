@@ -65,7 +65,3 @@ var ImageCenter = {
     ImageCenter.images.text('');
   },
 };
-
-$(function() {
-  ImageCenter.init('#image_center');
-});

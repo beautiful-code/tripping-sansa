@@ -14,6 +14,8 @@ var ChatSession = {
     this.addMessageListener();
 
     this.loadExistingMessages();
+
+    this.pollMessagesListener();
   },
 
   addMessageListener: function() {
@@ -28,7 +30,14 @@ var ChatSession = {
           }
         }
 
-        ChatSession.addMessage(UserConfig.user_email, ChatSession.ci.val(), clip, true);
+        new_message = {
+          user_email: UserConfig.user_email,
+          content: ChatSession.ci.val(),
+          clip: clip
+        };
+
+        ChatSession.addMessage(new_message, true);
+
         ChatSession.ci.val('');
         ImageCenter.clear();
       }
@@ -36,23 +45,29 @@ var ChatSession = {
     
   },
 
-  addMessage: function(author, content, clip, post_flag) {
+  pollMessagesListener: function() {
+    window.setInterval(function() {
+      console.log("Polling messages");
+    }, 2000);
+  },
+
+  addMessage: function(message, post_flag) {
     //Post the message back to the server
     
     if(post_flag)
-      $.post( "/rooms/" + RoomConfig.room_id + "/add_message", { user_id: UserConfig.id, content: content, clip: clip })
+      $.post( "/rooms/" + RoomConfig.room_id + "/add_message", { user_id: UserConfig.id, content: message.content, clip: message.clip })
         .done(function( data ) {
-          // All went well.
+          // All went well. Append data attributes of the saved message
       });
 
     // Render the message
     var new_message = ChatSession.message_template.clone();
     new_message.removeClass('message-template').addClass('message');
 
-    new_message.find('.author').text(author + ": ");
-    new_message.find('.content').text(content);
-    if(clip)
-      new_message.find('img').attr('src', clip.file_path);
+    new_message.find('.author').text(message.user_email + ": ");
+    new_message.find('.content').text(message.content);
+    if(message.clip)
+      new_message.find('img').attr('src', message.clip.file_path);
     ChatSession.cw.append(new_message);
 
     ChatSession.cw.animate({ scrollTop: ChatSession.cw.get(0).scrollHeight}, 1000);
@@ -62,7 +77,7 @@ var ChatSession = {
 
     $.getJSON( "/rooms/" + RoomConfig.room_id + ".json", function( data ) {
       $.each( data.messages, function( index, message ) {
-        ChatSession.addMessage(message.user_email, message.content, message.clip, false);
+        ChatSession.addMessage(message, false);
       });
     });
 
@@ -70,5 +85,7 @@ var ChatSession = {
 };
 
 $(function() {
-  ChatSession.init('#chat_session');
+  if($('#chat_session').length > 0 ) {
+    ChatSession.init('#chat_session');
+  }
 });
