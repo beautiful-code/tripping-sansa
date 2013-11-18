@@ -1,5 +1,6 @@
 JaffaChat::Application.routes.draw do
 
+
   resources :library_sets
 
 
@@ -12,6 +13,8 @@ JaffaChat::Application.routes.draw do
 
 
   devise_for :users
+
+  match 'profile' => 'users#profile', :as => :profile
 
   match 'search' => 'search#index', :as => :search
   match 'chat' => 'chat#index', :as => :chat

@@ -16,8 +16,8 @@ class Clip
       sayings.map {|s| s.text}
     end
 
-    string :library_title do
-      library.title
+    string :library_id do
+      library.id.to_s
     end
   end
 

@@ -1,0 +1,19 @@
+%p
+  %b Email:
+  = current_user.email
+
+= form_tag profile_path, :method => :post do
+  %p
+    %b Selected libraries:
+    %br
+    - LibrarySet.all.each do |library_set|
+      %i= library_set.title
+
+      %ul.library_set
+        - library_set.libraries.each do |library|
+          %li
+            = check_box_tag 'library_ids[]', library.id, current_user.library_ids.include?(library.id.to_s)
+            = library.title
+
+    %br
+    = submit_tag "Update Libraries"

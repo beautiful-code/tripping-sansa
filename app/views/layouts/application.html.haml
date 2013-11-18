@@ -18,7 +18,7 @@
     = javascript_include_tag "application"
 
 
-  %body
+  %body{:data => {:controller => controller_name, :action => action_name}}
     .navbar.navbar-fluid-top
       .navbar-inner
         .container-fluid
@@ -42,7 +42,7 @@
               - else
                 %li.user
                   Signed in as
-                  %b= current_user.email
+                  %b= link_to current_user.email, profile_path
                 %li= link_to "Logout", destroy_user_session_path, :method => :delete
                 :javascript
                   var UserConfig = #{{"id" => current_user.id, "user_email" =>  current_user.email }.to_json};
@@ -57,4 +57,3 @@
           = yield
     
       %footer
-        %p &copy; Company 2013

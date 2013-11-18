@@ -8,6 +8,7 @@ class SearchController < ApplicationController
       queries.each do |q|
         search = Clip.search {
                     fulltext q
+                    with(:library_id, current_user.library_ids)
                   }
         search.hits.each do |hit|
           all_results[hit.result] = (all_results[hit.result] || 0) + hit.score
