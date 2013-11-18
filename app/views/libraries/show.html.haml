@@ -22,6 +22,9 @@
 %p
   %b Title:
   = @library.title
+  - if @library.library_set
+    %b Library Set:
+    = link_to @library.library_set.title, @library.library_set
 
 %p 
   %b Clips

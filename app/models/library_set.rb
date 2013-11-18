@@ -1,8 +1,6 @@
-class Library
+class LibrarySet
   include Mongoid::Document
   field :title, type: String
 
-  belongs_to :library_set
-  has_many :clips
-
+  has_many :libraries
 end

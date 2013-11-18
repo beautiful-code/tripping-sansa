@@ -7,8 +7,9 @@
   - @libraries.each do |library|
     %tr
       %td
-        %b= library.title
-      %td= link_to 'Show', library
+        %b= link_to library.title, library
+        - if (library.library_set.present?)
+          = "(#{library.library_set.title})"
       %td= link_to 'Edit', edit_library_path(library)
 
 %br

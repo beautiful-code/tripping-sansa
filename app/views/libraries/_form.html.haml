@@ -9,5 +9,8 @@
   .field
     = f.label :title
     = f.text_field :title
+  .field
+    = f.label :library_set
+    = f.select :library_set, options_for_select(LibrarySet.all.collect {|l| [l.title, l.id]}, :selected => @library.library_set.present? ? @library.library_set.id : nil)
   .actions
     = f.submit 'Save'

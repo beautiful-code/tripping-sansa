@@ -1,5 +1,8 @@
 JaffaChat::Application.routes.draw do
 
+  resources :library_sets
+
+
   resources :rooms do
     member do
       post 'add_message'

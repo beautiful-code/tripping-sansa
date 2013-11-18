@@ -1,0 +1,17 @@
+- content_for :title, "LibrarySet: #{@library_set.title}"
+
+
+%p
+  %b Title:
+  = @library_set.title
+
+%p
+  %b Libraries:
+  %table.table.table-striped
+    - @library_set.libraries.each do |library|
+      %tr
+        %td= link_to library.title, library
+
+= link_to 'Edit', edit_library_set_path(@library_set)
+\|
+= link_to 'Back', library_sets_path

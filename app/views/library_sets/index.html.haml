@@ -1,0 +1,11 @@
+- @library_sets.each do |library_set|
+  %h5 
+    = link_to library_set.title, library_set
+
+  %table.table.table-striped
+    - library_set.libraries.each do |library|
+      %tr
+        %td= link_to library.title, library
+
+
+= link_to 'New Library set', new_library_set_path

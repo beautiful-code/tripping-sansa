@@ -29,6 +29,7 @@
           %a.brand(href="#") JaffaChat
           .container.nav-collapse
             %ul.nav
+              %li= link_to "Library Sets", library_sets_path
               %li= link_to "Libraries", libraries_path
               %li= link_to "Index Clips", reindex_clips_path, :method => :post
               %li= link_to "Search", search_path
