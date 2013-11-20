@@ -12,7 +12,7 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'sunspot_mongoid2'
 
-gem 'devise'
+gem 'devise', '3.0.1'
 
 
 

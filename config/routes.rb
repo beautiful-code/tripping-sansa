@@ -12,7 +12,7 @@ JaffaChat::Application.routes.draw do
   end
 
 
-  devise_for :users
+  devise_for :users,:controllers => { :registrations => :'api/user_registrations', :sessions=>'api/user_sessions' }
 
   match 'profile' => 'users#profile', :as => :profile
 
