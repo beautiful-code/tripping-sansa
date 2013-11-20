@@ -4,6 +4,10 @@ $:.unshift("#{rails_root}/lib")
 
 require 'capistrano/ext/multistage'
 require 'yaml'
+require 'capistrano-unicorn'
+require 'rvm/capistrano'
+require 'bundler/capistrano'
+require 'capistrano/utils'
 
 set :stages, ["production"]
 set :default_stage, "production"
@@ -27,12 +31,12 @@ ssh_options[:auth_methods] = %w(publickey)
 
 after "deploy:restart", "deploy:cleanup"
 
-=begin
+
 after "deploy:update_code", "mongoid:configure"
 after "deploy:update_code", "nginx:configure"
-after "deploy:update_code", "sunspot:configure"
+#after "deploy:update_code", "sunspot:configure"
 after "deploy:update_code", "unicorn:configure"
-=end
+
 
 after 'deploy:update_code' do
   run "mkdir -p #{shared_path}/assets"
@@ -40,20 +44,6 @@ after 'deploy:update_code' do
   run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
 end
 
-namespace :deploy do
-
-  task :start, roles: [:app] do
-    unicorn.start
-  end
-
-  task :stop, roles: [:app] do
-    unicorn.stop
-  end
-
-  task :restart, roles: [:app] do
-    true
-  end
-end
 
 namespace :mongoid do
   desc "configures mongoid"
@@ -85,8 +75,6 @@ namespace :nginx do
       sudo "service nginx #{action}"
     end
   end
-
-
 end
 
 namespace :sunspot do
@@ -106,7 +94,3 @@ namespace :unicorn do
   end
 end
 
-#require 'capistrano-unicorn'
-require 'rvm/capistrano'
-require 'bundler/capistrano'
-#require 'capistrano/utils'

@@ -13,7 +13,13 @@ set :unicorn_config, {
   workers: 2
 }
 
+set :db_config, {
+  host: '0.0.0.0',
+  port: 27017,
+}
+
 set :use_sudo, false
 set :rvm_ruby_string, "ruby-1.9.3-p429"
+
 set :user, "deploy"
 set :rvm_type, :user
