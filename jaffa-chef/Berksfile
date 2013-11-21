@@ -1,0 +1,7 @@
+site :opscode
+
+cookbook 'apt'
+cookbook 'git'
+cookbook 'nginx'
+cookbook 'mongodb'
+cookbook 'jaffa', path: 'cookbooks/jaffa'

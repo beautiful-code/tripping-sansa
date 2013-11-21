@@ -1,0 +1,37 @@
+preload_app true
+worker_processes <%= unicorn_config[:workers] %>
+working_directory "<%= release_path %>"
+
+listen "<%= shared_path %>/system/.sock", :backlog => 1024
+listen <%= unicorn_config[:port] %>, :tcp_nopush => true
+
+timeout 60
+
+pid "<%= shared_path %>/pids/unicorn.pid"
+
+stderr_path "<%= shared_path %>/log/unicorn.error.log"
+stdout_path "<%= shared_path %>/log/unicorn.access.log"
+
+
+GC.respond_to?(:copy_on_write_friendly=) and
+  GC.copy_on_write_friendly = true
+
+before_fork do |server, worker|
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+    
+  old_pid = "<%= shared_path %>/pids/unicorn.pid.oldbin"
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
+  end    
+end
+
+after_fork do |server, worker|
+  if defined?(ActiveRecord::Base)
+    ActiveRecord::Base.establish_connection
+  end
+end
