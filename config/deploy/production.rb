@@ -1,7 +1,7 @@
 set :rails_env, "production"
 #set :config, -> { YAML.load_file("#{rails_root}/config/app_config.yml")[rails_env] }
 
-server "54.254.204.250", :app, :web, primary:true
+server "54.254.137.190", :app, :web, primary:true
 
 # Deploy from local copy
 set :scm, :none

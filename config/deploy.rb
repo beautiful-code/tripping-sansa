@@ -28,22 +28,18 @@ ssh_options[:paranoid] = false
 default_run_options[:pty] = true
 ssh_options[:auth_methods] = %w(publickey)
 
-
 after "deploy:restart", "deploy:cleanup"
 
-
-after "deploy:update_code", "mongoid:configure"
-after "deploy:update_code", "nginx:configure"
-#after "deploy:update_code", "sunspot:configure"
-after "deploy:update_code", "unicorn:configure"
+after "deploy:create_symlink", "mongoid:configure"
+after "deploy:create_symlink", "nginx:configure"
+after "deploy:create_symlink", "unicorn:configure"
 
 
-after 'deploy:update_code' do
-  run "mkdir -p #{shared_path}/assets"
-  run "ln -nfs #{shared_path}/assets #{release_path}/public/assets; true"
-  run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
-end
-
+# after 'deploy:update_code' do
+#   run "mkdir -p #{shared_path}/assets"
+#   run "ln -nfs #{shared_path}/assets #{release_path}/public/assets; true"
+# #  run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
+# end
 
 namespace :mongoid do
   desc "configures mongoid"
@@ -70,17 +66,26 @@ namespace :nginx do
     template_configure 'nginx.conf'
   end
 
-  [ :start, :stop, :restart, :status ].each do |action|
+  [ :stop, :restart, :status ].each do |action|
     task action do
       sudo "service nginx #{action}"
     end
   end
+
+  task :start do
+    sudo "nginx -c #{shared_path}/config/nginx.conf" 
+  end
 end
 
 namespace :sunspot do
-  desc "configures sunspot"
-  task :configure, roles: [:web] do
-    template_configure 'sunspot.yml'
+  desc "start solr"
+  task :start, roles: [:app] do
+  	run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
+  end
+
+  desc "stop solr"
+  task :stop, roles: [:app] do
+  	run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
   end
 end
 
