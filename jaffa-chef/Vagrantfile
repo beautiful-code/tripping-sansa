@@ -1,0 +1,22 @@
+Vagrant.configure("2") do |config|
+ 
+  config.vm.box = "jaffa_aws"
+  config.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
+
+  config.vm.provider :aws do |aws, override|  
+    aws.security_groups = [ 'vagrant-singapore' ]    
+    aws.access_key_id = "AKIAJ3B3SD36NFMTZMPA"
+    aws.secret_access_key = "T57qY96Gn2ivPaTl0BVmfLnOzV4q8mSQrN7ErdQ7"
+    aws.keypair_name = "bcdev_singapore"
+    aws.region = 'ap-southeast-1'
+    #aws.ami = "ami-0145d268" #AMI for us-east-1
+    aws.ami = "ami-02612a50" #AMI for ap-southeast-1
+    aws.instance_type = "t1.micro"
+    override.ssh.username = "ubuntu"
+    override.ssh.private_key_path = "/home/itsprdp/.ssh/bcdev_singapore.pem" 
+  end
+  
+  config.vm.define :jaffa_node do 
+  end
+end
+
