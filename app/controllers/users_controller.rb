@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def profile
     if request.post?
-      current_user.update_attribute(:library_ids, params[:library_ids])
+      current_user.update_attribute(:library_ids, params[:library_ids] || [])
     end
   end
 end

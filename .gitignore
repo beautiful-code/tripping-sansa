@@ -23,3 +23,5 @@ solr
 .idea
 
 dump
+
+log/sunspot-solr-development.log.lck

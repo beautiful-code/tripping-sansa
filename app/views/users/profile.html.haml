@@ -12,7 +12,7 @@
       %ul.library_set
         - library_set.libraries.each do |library|
           %li
-            = check_box_tag 'library_ids[]', library.id, current_user.library_ids.include?(library.id.to_s)
+            = check_box_tag 'library_ids[]', library.id, current_user.library_ids && current_user.library_ids.include?(library.id.to_s)
             = library.title
 
     %br
