@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
     aws.ami = "ami-02612a50" #AMI for ap-southeast-1
     aws.instance_type = "t1.micro"
     override.ssh.username = "ubuntu"
-    override.ssh.private_key_path = "/home/itsprdp/.ssh/bcdev_singapore.pem" 
+    override.ssh.private_key_path = "~/.ssh/bcdev_singapore.pem" 
   end
   
   config.vm.define :jaffa_node do 
