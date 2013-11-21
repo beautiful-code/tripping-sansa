@@ -103,4 +103,12 @@ class RoomsController < ApplicationController
     render json: @room.messages.select {|m| m.created_at.to_i > params[:since].to_i}
   end
 
+  def empty
+    @room = Room.find(params[:id])
+    @room.messages.destroy_all
+
+    redirect_to request.referer, notice: 'Messages emptied.'
+    
+  end
+
 end

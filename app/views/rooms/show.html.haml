@@ -1,5 +1,7 @@
 - content_for :title, "Room: #{@room.name}"
 %h2= @room.name
+= link_to 'Clear messages', empty_room_path(@room), :method => :post
+
 .row-fluid
   .span4
     #chat_session

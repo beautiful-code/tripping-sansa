@@ -7,6 +7,7 @@ JaffaChat::Application.routes.draw do
   resources :rooms do
     member do
       post 'add_message'
+      post 'empty'
       get 'messages'
     end
   end
