@@ -7,6 +7,7 @@ class Room
   def as_json *args
     {
       :id => id,
+      :name => name,
       :messages => messages.as_json
     }
   end
