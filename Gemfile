@@ -13,6 +13,9 @@ gem 'sunspot_solr'
 gem 'sunspot_mongoid2'
 
 gem 'devise', '3.0.1'
+gem 'appconfig', :require => 'app_config'
+gem 'faraday'
+
 
 
 

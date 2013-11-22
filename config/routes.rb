@@ -1,8 +1,8 @@
 JaffaChat::Application.routes.draw do
 
+  get "openfire/add_user"
 
   resources :library_sets
-
 
   resources :rooms do
     member do

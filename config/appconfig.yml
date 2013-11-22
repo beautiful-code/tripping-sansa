@@ -1,0 +1,6 @@
+openfire:
+  host: vagrant-ubuntu-precise-64
+  port: 9090
+  secret: secret
+  user_password: password
+
