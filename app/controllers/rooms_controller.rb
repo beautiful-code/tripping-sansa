@@ -88,7 +88,7 @@ class RoomsController < ApplicationController
 
     @room = Room.find(params[:id])
     msg = @room.messages.create(
-      :user_id => params[:user_id], 
+      :user_id => current_user.id,
       :content => params[:content],
       :clip_id => params[:clip].present? ? params[:clip][:id] : nil
     )

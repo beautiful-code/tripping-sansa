@@ -19,7 +19,7 @@ class Api::UserSessionsController < Devise::SessionsController
         unless self.resource
           invalid_login_attempt
         else
-          render :json => {:success => true, :auth_token => resource.authentication_token, :email => resource.email}
+          render :json => {:success => true, :authentication_token => resource.authentication_token, :email => resource.email}
         end
       end
 
