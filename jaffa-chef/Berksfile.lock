@@ -12,38 +12,65 @@
     "mongodb": {
       "locked_version": "0.13.7"
     },
+    "postgresql": {
+      "locked_version": "3.2.0"
+    },
+    "openfire": {
+      "locked_version": "0.2.0"
+    },
     "jaffa": {
       "path": "./cookbooks/jaffa"
     },
+    "jaffa_openfire": {
+      "path": "./cookbooks/jaffa_openfire"
+    },
     "dmg": {
-      "locked_version": "2.0.8"
+      "locked_version": "2.0.2"
     },
     "build-essential": {
       "locked_version": "1.4.2"
     },
     "yum": {
-      "locked_version": "2.4.2"
+      "locked_version": "2.3.2"
     },
     "windows": {
-      "locked_version": "1.11.0"
+      "locked_version": "1.10.0"
     },
     "chef_handler": {
       "locked_version": "1.1.4"
     },
     "runit": {
-      "locked_version": "1.4.0"
+      "locked_version": "1.2.0"
     },
     "bluepill": {
       "locked_version": "2.3.0"
     },
     "rsyslog": {
-      "locked_version": "1.9.0"
+      "locked_version": "1.8.0"
     },
     "ohai": {
       "locked_version": "1.1.12"
     },
     "python": {
-      "locked_version": "1.4.4"
+      "locked_version": "1.4.0"
+    },
+    "openssl": {
+      "locked_version": "1.1.0"
+    },
+    "java": {
+      "locked_version": "1.13.0"
+    },
+    "database": {
+      "locked_version": "1.5.2"
+    },
+    "mysql": {
+      "locked_version": "3.0.4"
+    },
+    "aws": {
+      "locked_version": "1.0.0"
+    },
+    "xfs": {
+      "locked_version": "1.1.0"
     }
   }
 }

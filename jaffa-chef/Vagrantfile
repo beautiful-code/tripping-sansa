@@ -18,5 +18,8 @@ Vagrant.configure("2") do |config|
   
   config.vm.define :jaffa_node do 
   end
+
+  config.vm.define :openfire_node do
+  end
 end
 

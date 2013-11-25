@@ -1,0 +1,17 @@
+{
+  "default_attributes": {
+    "openfire": { 
+      "database": { 
+        "type": "postgresql",
+        "password": "password"
+       }
+     },
+    "postgresql": {
+       "password": {
+          "postgres": "password"
+       }
+    }
+  },
+  "run_list":["recipe[jaffa_openfire]"]
+}
+

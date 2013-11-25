@@ -1,0 +1,4 @@
+cookbook 'openfire-chef', :path => '/Users/kycaci/Coding/berks-repos/openfire-chef'
+cookbook 'java', :locked_version => '1.9.2'
+cookbook 'windows', :locked_version => '1.7.0'
+cookbook 'chef_handler', :locked_version => '1.1.4'
