@@ -19,7 +19,11 @@ public/system
 *.swp
 *.swo
 
-solr
+solr/data
+solr/development
+solr/pids
+solr/text
+
 .idea
 
 dump
