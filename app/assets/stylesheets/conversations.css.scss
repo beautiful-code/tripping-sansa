@@ -1,0 +1,37 @@
+  textarea {
+    width: 400px;
+  }
+
+  #conversation_content {
+    font-size: 150%;
+    margin-top: 10px;
+    width: 450px;
+    padding: 10px;
+    //border: 1px solid #eee;
+
+    .msg {
+      margin-bottom: 5px;
+      padding: 5px;
+
+      img {
+        display: block;
+      }
+      span {
+        padding: 10px;
+        border-radius:15px;
+        line-height: 200%;
+      }
+      &.user1 {
+        span {
+          background: #F5F5DC;
+        }
+      }
+      &.user2 {
+        text-align: right;
+        span {
+          background: #CDFECD;
+        }
+      }
+    }
+
+  }

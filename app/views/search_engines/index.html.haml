@@ -1,0 +1,8 @@
+%h1 Listing SearchEngines
+
+%table.table.table-striped
+  %tr
+    %th Title
+  - @search_engines.each do |search_engine|
+    %tr
+      %td= link_to search_engine, search_engine_apply_path(:engine => search_engine)

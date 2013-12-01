@@ -28,8 +28,9 @@
               %li= link_to "Libraries", libraries_path
               %li= link_to "Index Clips", reindex_clips_path, :method => :post
               %li= link_to "Search", search_path
-              %li= link_to "Chat", chat_path
               %li= link_to "Rooms", rooms_path
+              %li= link_to "Conversations", conversations_path
+              %li= link_to "Search Engines", search_engines_path
             %ul.nav.pull-right
               - unless current_user
                 %li= link_to "Sign In", new_user_session_path

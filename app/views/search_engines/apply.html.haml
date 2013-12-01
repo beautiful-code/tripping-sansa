@@ -1,0 +1,23 @@
+- content_for :sidebar do
+  - Conversation.all.each do |conv|
+    = link_to "#{conv.title}(#{conv.applied_count(@search_engine)})", search_engine_apply_path(:conv_id => conv.id) 
+    %br
+
+- if @applied_lines.present?
+  #conversation_content
+    - @applied_lines.each do |applied_line|
+      - if applied_line.class == Array
+        - line = applied_line.second
+        - clip = applied_line.first.first # the first clip
+      - else
+        - line = applied_line
+        - clip = nil
+
+      - user = line.split(',').shift
+      - msg = line.split(',')[1,line.length].join(',')
+      .msg{:class => "user#{user}"}
+        %span
+          - if clip
+            = image_tag(clip.file)
+          = msg
+

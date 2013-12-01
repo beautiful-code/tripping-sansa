@@ -1,0 +1,21 @@
+- content_for :sidebar do
+  - Conversation.all.each do |conv|
+    = link_to conv.title, conv
+    %br
+
+  %p
+    %br
+    %br
+    %i.icon-plus-sign
+    = link_to 'New Conversation', new_conversation_path
+  
+%h3= @conversation.title
+= link_to 'Edit', edit_conversation_path(@conversation)
+
+#conversation_content
+  - @conversation.lines.each do |line|
+    - user = line.split(',').shift
+    - msg = line.split(',')[1,line.length].join(',')
+    .msg{:class => "user#{user}"}
+      %span= msg
+
